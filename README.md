@@ -3,4 +3,4 @@ A solar tracker is a device that orients solar panels - mirrors toward the sun t
 
 ![image alt](https://github.com/Pantakidou/Solar-Tracker/blob/main/Solar%20Tracker.jpeg?raw=true)
 
-![image alt]()
+![image alt](https://github.com/Pantakidou/Solar-Tracker/blob/main/Solar%20Tracker..jpeg?raw=true)
