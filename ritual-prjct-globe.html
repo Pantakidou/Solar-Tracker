@@ -213,14 +213,16 @@
       context.font = "700 " + fontSize + "px 'Cinzel', 'Trajan Pro', Georgia, serif";
       context.textAlign="center"; context.textBaseline="middle";
       if ("letterSpacing" in context) { context.letterSpacing = Math.max(1, fontSize*0.06) + "px"; }
-      context.shadowColor = "#F0FF00";
-      context.shadowBlur = fontSize * 1.4;
-      context.fillStyle = "#F0FF00";
+      context.shadowColor = "#FFFF00";
+      context.shadowBlur = fontSize * 1.8;
+      context.fillStyle = "#FFFF00";
       context.fillText("RITUAL PRJCT", cx, cy);
-      context.shadowBlur = fontSize * 0.7;
+      context.shadowBlur = fontSize * 1.0;
+      context.fillText("RITUAL PRJCT", cx, cy);
+      context.shadowBlur = fontSize * 0.5;
       context.fillText("RITUAL PRJCT", cx, cy);
       context.shadowBlur = 0;
-      context.fillStyle = "#FFFFCC";
+      context.fillStyle = "#FFFF66";
       context.fillText("RITUAL PRJCT", cx, cy);
       context.restore();
     }
