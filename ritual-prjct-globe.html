@@ -4,6 +4,9 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Ritual Prjct - Rotating Globe</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700&display=swap" rel="stylesheet" />
   <style>
     html, body { margin:0; padding:0; width:100%; height:100%; background:#0a0a0a; color:#e5e5e5; font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif; overflow:hidden; }
     .stage { position:fixed; inset:0; display:flex; align-items:center; justify-content:center; }
@@ -207,11 +210,12 @@
       const scaleFactor=currentScale/radius;
       const cx=width/2, cy=height/2;
       context.save();
-      context.font = "bold " + Math.round(34*scaleFactor) + "px sans-serif";
+      context.font = "600 " + Math.round(40*scaleFactor) + "px 'Cinzel', 'Trajan Pro', Georgia, serif";
       context.textAlign="center"; context.textBaseline="middle";
+      if ("letterSpacing" in context) { context.letterSpacing = (3*scaleFactor) + "px"; }
       context.fillStyle="#FFD400";
-      context.shadowColor="rgba(0,0,0,0.9)"; context.shadowBlur=8*scaleFactor;
-      context.fillText("Ritual Prjct", cx, cy);
+      context.shadowColor="rgba(255,212,0,0.35)"; context.shadowBlur=14*scaleFactor;
+      context.fillText("RITUAL PRJCT", cx, cy);
       context.restore();
     }
     function render(){
@@ -222,6 +226,8 @@
       context.arc(width/2,height/2,currentScale,0,2*Math.PI);
       context.fillStyle="#000000"; context.fill();
       context.strokeStyle="#ffffff"; context.lineWidth=2*scaleFactor; context.stroke();
+      // Label inside the sphere — drawn BEFORE land so continents/dots pass over it.
+      drawCenterLabel();
       if(landFeatures){
         const graticule=d3.geoGraticule();
         context.beginPath(); path(graticule());
@@ -239,7 +245,6 @@
           }
         });
       }
-      drawCenterLabel();
     }
     const rotation=[0,0]; let autoRotate=true; const rotationSpeed=0.5;
     d3.timer(function(){ if(autoRotate){ rotation[0]+=rotationSpeed; projection.rotate(rotation); render(); } });
@@ -275,6 +280,9 @@
       dots.forEach(function(d){ allDots.push(d); });
     });
     render();
+    if (document.fonts && document.fonts.load) {
+      document.fonts.load("600 40px 'Cinzel'").then(function(){ render(); });
+    }
   })();
   </script>
 </body>

@@ -139,13 +139,16 @@ export default function RotatingEarth({ width = 800, height = 600, className = "
       const cy = containerHeight / 2
 
       context.save()
-      context.font = `bold ${Math.round(28 * scaleFactor)}px sans-serif`
+      context.font = `600 ${Math.round(40 * scaleFactor)}px 'Cinzel', 'Trajan Pro', Georgia, serif`
       context.textAlign = "center"
       context.textBaseline = "middle"
+      if ("letterSpacing" in context) {
+        ;(context as any).letterSpacing = `${3 * scaleFactor}px`
+      }
       context.fillStyle = "#FFD400"
-      context.shadowColor = "rgba(0, 0, 0, 0.85)"
-      context.shadowBlur = 6 * scaleFactor
-      context.fillText("Ritual Prjct", cx, cy)
+      context.shadowColor = "rgba(255, 212, 0, 0.35)"
+      context.shadowBlur = 14 * scaleFactor
+      context.fillText("RITUAL PRJCT", cx, cy)
       context.restore()
     }
 
@@ -164,6 +167,10 @@ export default function RotatingEarth({ width = 800, height = 600, className = "
       context.strokeStyle = "#ffffff"
       context.lineWidth = 2 * scaleFactor
       context.stroke()
+
+      // Label sits inside the sphere — graticule, land outlines and dots
+      // are drawn after, so the globe appears to pass over the text.
+      drawCenterLabel()
 
       if (landFeatures) {
         // Draw graticule
@@ -202,9 +209,6 @@ export default function RotatingEarth({ width = 800, height = 600, className = "
           }
         })
       }
-
-      // Fixed yellow label inside the globe (does not rotate with the Earth)
-      drawCenterLabel()
     }
 
     const loadWorldData = async () => {
