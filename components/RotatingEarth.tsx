@@ -146,15 +146,11 @@ export default function RotatingEarth({ width = 800, height = 600, className = "
         ;(context as any).letterSpacing = `${Math.max(1, fontSize * 0.06)}px`
       }
       context.shadowColor = "#FFFF00"
-      context.shadowBlur = fontSize * 1.8
-      context.fillStyle = "#FFFF00"
-      context.fillText("RITUAL PRJCT", cx, cy)
-      context.shadowBlur = fontSize * 1.0
-      context.fillText("RITUAL PRJCT", cx, cy)
       context.shadowBlur = fontSize * 0.5
+      context.fillStyle = "#FFE500"
       context.fillText("RITUAL PRJCT", cx, cy)
-      context.shadowBlur = 0
-      context.fillStyle = "#FFFF66"
+      context.shadowBlur = fontSize * 0.2
+      context.fillStyle = "#FFFF33"
       context.fillText("RITUAL PRJCT", cx, cy)
       context.restore()
     }
