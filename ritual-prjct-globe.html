@@ -207,14 +207,20 @@
     const allDots=[]; let landFeatures=null;
     function drawCenterLabel(){
       const currentScale=projection.scale();
-      const scaleFactor=currentScale/radius;
       const cx=width/2, cy=height/2;
+      const fontSize = Math.max(10, Math.round(currentScale * 0.13));
       context.save();
-      context.font = "600 " + Math.round(40*scaleFactor) + "px 'Cinzel', 'Trajan Pro', Georgia, serif";
+      context.font = "700 " + fontSize + "px 'Cinzel', 'Trajan Pro', Georgia, serif";
       context.textAlign="center"; context.textBaseline="middle";
-      if ("letterSpacing" in context) { context.letterSpacing = (3*scaleFactor) + "px"; }
-      context.fillStyle="#FFD400";
-      context.shadowColor="rgba(255,212,0,0.35)"; context.shadowBlur=14*scaleFactor;
+      if ("letterSpacing" in context) { context.letterSpacing = Math.max(1, fontSize*0.06) + "px"; }
+      context.shadowColor = "#F0FF00";
+      context.shadowBlur = fontSize * 1.4;
+      context.fillStyle = "#F0FF00";
+      context.fillText("RITUAL PRJCT", cx, cy);
+      context.shadowBlur = fontSize * 0.7;
+      context.fillText("RITUAL PRJCT", cx, cy);
+      context.shadowBlur = 0;
+      context.fillStyle = "#FFFFCC";
       context.fillText("RITUAL PRJCT", cx, cy);
       context.restore();
     }
@@ -226,7 +232,6 @@
       context.arc(width/2,height/2,currentScale,0,2*Math.PI);
       context.fillStyle="#000000"; context.fill();
       context.strokeStyle="#ffffff"; context.lineWidth=2*scaleFactor; context.stroke();
-      // Label inside the sphere — drawn BEFORE land so continents/dots pass over it.
       drawCenterLabel();
       if(landFeatures){
         const graticule=d3.geoGraticule();
@@ -281,7 +286,7 @@
     });
     render();
     if (document.fonts && document.fonts.load) {
-      document.fonts.load("600 40px 'Cinzel'").then(function(){ render(); });
+      document.fonts.load("700 40px 'Cinzel'").then(function(){ render(); });
     }
   })();
   </script>

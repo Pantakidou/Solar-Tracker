@@ -134,20 +134,25 @@ export default function RotatingEarth({ width = 800, height = 600, className = "
 
     const drawCenterLabel = () => {
       const currentScale = projection.scale()
-      const scaleFactor = currentScale / radius
       const cx = containerWidth / 2
       const cy = containerHeight / 2
+      const fontSize = Math.max(10, Math.round(currentScale * 0.13))
 
       context.save()
-      context.font = `600 ${Math.round(40 * scaleFactor)}px 'Cinzel', 'Trajan Pro', Georgia, serif`
+      context.font = `700 ${fontSize}px 'Cinzel', 'Trajan Pro', Georgia, serif`
       context.textAlign = "center"
       context.textBaseline = "middle"
       if ("letterSpacing" in context) {
-        ;(context as any).letterSpacing = `${3 * scaleFactor}px`
+        ;(context as any).letterSpacing = `${Math.max(1, fontSize * 0.06)}px`
       }
-      context.fillStyle = "#FFD400"
-      context.shadowColor = "rgba(255, 212, 0, 0.35)"
-      context.shadowBlur = 14 * scaleFactor
+      context.shadowColor = "#F0FF00"
+      context.shadowBlur = fontSize * 1.4
+      context.fillStyle = "#F0FF00"
+      context.fillText("RITUAL PRJCT", cx, cy)
+      context.shadowBlur = fontSize * 0.7
+      context.fillText("RITUAL PRJCT", cx, cy)
+      context.shadowBlur = 0
+      context.fillStyle = "#FFFFCC"
       context.fillText("RITUAL PRJCT", cx, cy)
       context.restore()
     }
